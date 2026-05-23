@@ -70,10 +70,14 @@ public class Jeopardy implements ActionListener {
 
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
+		secondButton = createButton("$200");
+		
 
 		// 10. Add the secondButton to the quizPanel
-
+		quizPanel.add(secondButton);
 		// 11. Add action listeners to the buttons (2 lines of code)
+		firstButton.addActionListener(this);
+		secondButton.addActionListener(this);
 
 		// 12. Write the code to complete the actionPerformed() method below
 
@@ -115,6 +119,10 @@ public class Jeopardy implements ActionListener {
 
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
+		if (buttonPressed == firstButton) {
+			askQuestion();
+			
+		}
 
 		// Call the askQuestion() method
 
@@ -134,18 +142,35 @@ public class Jeopardy implements ActionListener {
 
 		// Use the playJeopardyTheme() method to play music while the use thinks of an
 		// answer
+		playJeopardyTheme();
 
 		// Remove this temporary message and replace it with a pop-up that asks the user
 		// the question
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+		String answer = JOptionPane.showInputDialog(null, "are you a taco");
 
 		// Stop the theme music when they have entered their response.
+		if (answer == null) {
+		}
+		else {
+			stopJeopardyTheme();
+		}
 
 		// If the answer is correct
+		if (answer == "always and forever") {
+			score +=prizeMoney;
+			JOptionPane.showMessageDialog(null, "you are correct!!!!");
+			updateScore();
+		}
+		else {
+			score -=prizeMoney;
+			JOptionPane.showMessageDialog(null, "you are wRONG!!!! the coRRECT answer was 'always and forever', you worthless imbecilic creature");
+			updateScore();
+		}
 
 		// Increase the score by the prizeMoney
 
 		// Pop up a message to tell the user they were correct
+		
 
 		// Otherwise
 
