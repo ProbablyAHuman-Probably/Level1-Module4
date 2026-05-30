@@ -30,7 +30,7 @@ import game_tools.Sound;
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
-	private JButton thirdButton, fourthButton;
+	private JButton thirdButton, fourthButton, fifthButton, sixthButton;
 	private JPanel quizPanel;
 	private int score = 0;
 	private JLabel scoreBox = new JLabel("0");
@@ -47,10 +47,10 @@ public class Jeopardy implements ActionListener {
 		frame.setVisible(true);
 
 		// 2. Give your frame a title
-		frame.setTitle("frame ig");
+		frame.setTitle("jeopardy");
 
 		// 3. Create a JPanel variable to hold the header using the createHeader method
-		JPanel panel = createHeader("name");
+		JPanel panel = createHeader("super incredibly hard questions(ultimate sigmas edition)");
 
 		// 4. Add the header component to the quizPanel
 		quizPanel.add(panel);
@@ -59,7 +59,7 @@ public class Jeopardy implements ActionListener {
 		frame.add(quizPanel);
 
 		// 6. Use the createButton method to set the value of firstButton
-		firstButton = createButton("button");
+		firstButton = createButton("$100");
 
 		// 7. Add the firstButton to the quizPanel
 		quizPanel.add(firstButton);
@@ -71,10 +71,19 @@ public class Jeopardy implements ActionListener {
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
 		secondButton = createButton("$200");
+		thirdButton = createButton("$400");
+		fourthButton = createButton("$600");
+		fifthButton = createButton("$800");
+		sixthButton = createButton("$1000");
 		
 
 		// 10. Add the secondButton to the quizPanel
 		quizPanel.add(secondButton);
+		quizPanel.add(thirdButton);
+		quizPanel.add(fourthButton);
+		quizPanel.add(fifthButton);
+		quizPanel.add(sixthButton);
+		
 		// 11. Add action listeners to the buttons (2 lines of code)
 		firstButton.addActionListener(this);
 		secondButton.addActionListener(this);
@@ -120,7 +129,7 @@ public class Jeopardy implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
 		if (buttonPressed == firstButton) {
-			askQuestion();
+			askQuestion("are you a taco", "always and forever", 100);
 			
 		}
 
@@ -130,6 +139,30 @@ public class Jeopardy implements ActionListener {
 		// score should change.
 
 		// If the buttonPressed was the secondButton
+		if (buttonPressed == secondButton) {
+			askQuestion("imagine beaing a country person lmfao", "yee yee", 200);
+			secondButton.setText("");
+		}
+		
+		if (buttonPressed == thirdButton) {
+			askQuestion("how many braincells dost thou have left", "The FitnessGram™ Pacer Test is a multistage aerobic capacity test", 200);
+			secondButton.setText("");
+		}
+		
+		if (buttonPressed == fourthButton) {
+			askQuestion("augh", "i agree", 200);
+			secondButton.setText("");
+		}
+		
+		if (buttonPressed == fifthButton) {
+			askQuestion("so here i go", "im reporting you to the cops", 200);
+			secondButton.setText("");
+		}
+		
+		if (buttonPressed == sixthButton) {
+			askQuestion("ARE YOU A TRUE ULTIMATE SIGMA", "YES", 200);
+			secondButton.setText("");
+		}
 
 		// Call the askQuestion() method with a harder question
 
@@ -146,24 +179,25 @@ public class Jeopardy implements ActionListener {
 
 		// Remove this temporary message and replace it with a pop-up that asks the user
 		// the question
-		String answer = JOptionPane.showInputDialog(null, "are you a taco");
+		String answer = JOptionPane.showInputDialog(null, question);
 
 		// Stop the theme music when they have entered their response.
 		if (answer == null) {
+			return;
 		}
 		else {
 			stopJeopardyTheme();
 		}
 
 		// If the answer is correct
-		if (answer == "always and forever") {
+		if (answer.equals(correctAnswer)) {
 			score +=prizeMoney;
 			JOptionPane.showMessageDialog(null, "you are correct!!!!");
 			updateScore();
 		}
 		else {
 			score -=prizeMoney;
-			JOptionPane.showMessageDialog(null, "you are wRONG!!!! the coRRECT answer was 'always and forever', you worthless imbecilic creature");
+			JOptionPane.showMessageDialog(null, "you are wRONG!!!! the coRRECT answer was '" + correctAnswer + "', you worthless imbecilic creature");
 			updateScore();
 		}
 
